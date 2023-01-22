@@ -19,6 +19,7 @@ function App() {
   //the callback to get the result of the encodded image
   function onResult(result) {
     setEncodedImage(result);
+    //reset the style of copy to clipboard
     setCopyToClipboardTxt("Click here to copy!");
     copyBtn.current.disabled = false;
   }
@@ -29,11 +30,23 @@ function App() {
     copyBtn.current.disabled = true;
 
   }
+
+  function saveUser(){
+    let user={
+      name:"kenan",
+      age:25,
+      image: encodedImage.base64
+    }
+
+    
+
+  }
   return (
     <div className="App" style={{ textAlign: "center" }}>
 
       <input type='file' id='file' onChange={handleChange} />
       {encodedImage && <div> <h2>this is the encoded image after decoded it</h2>
+      
       {/*this is the image after decoded it*/ }
         <img width="750px" style={{ "borderRadius": "10px", "boxShadow": "5px 7px 19px 0px #4ddca0" }}
           src={`data:image/jpeg;base64,${encodedImage.base64}`} />
@@ -43,6 +56,8 @@ function App() {
           <h2>this is the Base64 of the uploaded image</h2>
           <button ref={copyBtn} onClick={copyToClipBoard}>{copyToClipboardTxt}</button>
           <p style={{ overflowWrap: "break-word" }}>{encodedImage ? encodedImage.base64 : ""}</p>
+
+
         </div>}</div>
   );
 }
